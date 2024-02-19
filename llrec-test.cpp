@@ -67,7 +67,15 @@ void dealloc(Node* head)
 //   function object struct declarations
 // -----------------------------------------------
 
+struct Comp {
 
+    bool operator()(int x) {
+        if (x % 2 == 1) {
+            return true;
+        }
+        return false;
+    }
+};
 
 
 
@@ -85,7 +93,23 @@ int main(int argc, char* argv[])
     cout << "Original list: ";
     print(head);
 
+    Comp comp = Comp();
+    head = llfilter(head, comp);
+    cout << "New List: ";
+    print (head);
+
     // Test out your linked list code
+    /*Node* smaller; Node* larger;
+    llpivot(head, smaller, larger, 9);
+    cout  << "Larger: ";
+    print(larger);
+    cout << "Smaller: ";
+    print(smaller);
+    if (head == nullptr) {
+        cout << "head = nullptr" << endl;
+    }
+    cout.flush(); */
+
 
 
 
