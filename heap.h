@@ -3,7 +3,6 @@
 #include <functional>
 #include <stdexcept>
 #include <vector>
-#include <iostream>
 
 template <typename T, typename PComparator = std::less<T> >
 class Heap
@@ -61,12 +60,12 @@ public:
    */
   size_t size() const;
 
-  void printTree() {
+  /*void printTree() {
     for (int i = 0; i < tree.size(); i++) {
       std::cout << i << ": " << tree[i] << " ";
     }
     std::cout << "\n" << std::endl;
-  }
+  } */
 
 private:
   /// Add whatever helper functions and data members you need below
@@ -155,9 +154,7 @@ void Heap<T,PComparator>::pop()
   std::swap(tree[0], tree[size()-1]);
   //std::cout << "deleting: " << tree[size()-1] << std::endl;
   tree.pop_back();
-  printTree();
-
-
+  
   int index = 0;
 
   while (index < size()) {
