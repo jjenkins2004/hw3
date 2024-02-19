@@ -154,36 +154,28 @@ void Heap<T,PComparator>::pop()
   std::swap(tree[0], tree[size()-1]);
   //std::cout << "deleting: " << tree[size()-1] << std::endl;
   tree.pop_back();
-  
+
   int index = 0;
 
   while (index < size()) {
     int leftC = 2*index+1;
     int rightC = 2*index+2;
-    if (leftC >=size()) {
-      break;
-    }
-    if (rightC >= size()) {
-      if (comp(tree[leftC], tree[index])) {
-        std::swap(tree[leftC], tree[index]);
-      }
-      break;
-    }
+    int priority = index;
     //std::cout << tree[index] << " is at " << index << " comparing to " << tree[leftC] << " and " << tree[rightC] << std::endl;
-    if (comp(tree[leftC], tree[index]) && comp(tree[leftC], tree[rightC])) {
-      std::swap(tree[leftC], tree[index]);
+    if (leftC < size() && comp(tree[leftC], tree[priority])) {
       //std::cout << "determined that " << tree[index] << " should be swapped with " << tree[leftC] << "\n" << std::endl;
-      index = leftC;
+      priority = leftC;
     }
-    else if (comp(tree[rightC], tree[index]) && comp(tree[rightC], tree[leftC])) {
-      std::swap(tree[rightC], tree[index]);
+    if (rightC < size() && comp(tree[rightC], tree[priority])) {
        //std::cout << "determined that " << tree[index] << " should be swapped with " << tree[rightC] << "\n" << std::endl;
-      index = rightC;
+      priority = rightC;
     }
-    else {
+    if (priority == index) {
       //std::cout << tree[index] << " is good where it is" << std::endl;
       break;
     }
+    std::swap(tree[index], tree[priority]);
+    index = priority;
   }
 
 
