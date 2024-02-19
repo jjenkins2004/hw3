@@ -158,28 +158,21 @@ void Heap<T,PComparator>::pop()
   int index = 0;
 
   while (index < size()) {
-    int leftC = 2*index+1;
-    int rightC = 2*index+2;
     int priority = index;
-    //std::cout << tree[index] << " is at " << index << " comparing to " << tree[leftC] << " and " << tree[rightC] << std::endl;
-    if (leftC < size() && comp(tree[leftC], tree[priority])) {
-      //std::cout << "determined that " << tree[index] << " should be swapped with " << tree[leftC] << "\n" << std::endl;
-      priority = leftC;
-    }
-    if (rightC < size() && comp(tree[rightC], tree[priority])) {
-       //std::cout << "determined that " << tree[index] << " should be swapped with " << tree[rightC] << "\n" << std::endl;
-      priority = rightC;
+    for (int i = 2*(index)+1; i <= 2*(index)+n; i++) {
+      if (i >= size()) {
+        break;
+      }
+      if (comp(tree[i], tree[priority])) {
+        priority = i;
+      }
     }
     if (priority == index) {
-      //std::cout << tree[index] << " is good where it is" << std::endl;
       break;
     }
     std::swap(tree[index], tree[priority]);
     index = priority;
   }
-
-
-
 }
 
 
